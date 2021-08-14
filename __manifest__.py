@@ -17,7 +17,7 @@
 Module allows to print custom product barcode labels and tags on different paper formats.
 This module include the one label template with size: 57x35mm, paperformat: A4 (21 pcs per sheet, 3 pcs x 7 rows).
     """,
-    'depends': ['product'],
+    'depends': ['product','customized_barcode_generator'],
     'data': [
         'wizard/print_product_label_views.xml',
         'report/product_label_templates.xml',

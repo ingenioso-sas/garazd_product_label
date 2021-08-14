@@ -6,7 +6,7 @@
                 <td class="col-xs-4 text-center" style="border:0;margin:0;padding:0;">
                     <span t-field="label.product_id.name" style="font-size:1.2em;"/>
                     <div style="overflow:hidden; width: 100% !important; font-size: 1.4em; line-height: 1;">
-                        <span t-if="'get_cost_in_code' in label.product_id" t-esc="label.product_id.get_cost_in_code()[:-3]"/><span t-esc="(label.write_date.strftime('%y0%m0%d'))"/>
+                        <span t-esc="label.product_id.get_cost_in_code()[:-3]"/><span t-esc="(label.write_date.strftime('%y0%m0%d'))"/>
                         (<span t-field="label.product_id.product_template_attribute_value_ids"/>)
                     </div>
                     <div style="width: 100%; padding: 0; margin: 0; font-size: 2.3em; font-weight: bold;">
