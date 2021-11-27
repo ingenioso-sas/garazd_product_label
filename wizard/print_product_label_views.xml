@@ -30,6 +30,7 @@
                         type="object"
                         icon="fa-search"
                         class="btn-secondary mr8"  />
+
                 </header>
                 <div class="alert alert-info text-center mb-3"
                      attrs="{'invisible':[('message', '=', False)]}"
@@ -82,12 +83,30 @@
         context="{'default_product_ids': active_ids}"/>
 
     <act_window id="action_print_label_from_product"
-        name="Custom Product Labels"
+        name="Imprimir etiquetas de productos"
         binding_model="product.product"
         res_model="print.product.label"
         view_mode="form"
         binding_type="report"
         target="current"
         context="{'default_product_ids': active_ids}"/>
+
+    <act_window id="action_print_label_from_product_order"
+        name="Custom Product Labels"
+        binding_model="purchase.order"
+        res_model="print.product.label"
+        view_mode="form,list"
+        binding_type="report"
+        target="current"
+        context="{'default_product_ids': active_ids}"/>
+
+    <record model="ir.actions.act_window" id="action_purchase_list_product">
+        <field name="name">Impresion nueva</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">print.product.label</field>
+        <field name="view_mode">tree,form,list</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
 
 </odoo>

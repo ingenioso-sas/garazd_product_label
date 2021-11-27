@@ -2,7 +2,9 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import Warning
+import logging
 
+_logger = logging.getLogger(__name__)
 
 class PrintProductLabel(models.TransientModel):
     _name = "print.product.label"
@@ -11,21 +13,46 @@ class PrintProductLabel(models.TransientModel):
     @api.model
     def _get_products(self):
         res = []
-        if self._context.get('active_model') == 'product.template':
-            products = self.env[self._context.get('active_model')].browse(self._context.get('default_product_ids'))
+
+        active_model = self._context.get('active_model')
+        _logger.info('active_model:' + str(active_model))
+
+        _datos = self.env[active_model].browse(self._context.get('default_product_ids'))
+
+        if active_model == 'product.template':
+            products = _datos
             for product in products:
                 label = self.env['print.product.label.line'].create({
                     'product_id': product.product_variant_id.id,
                 })
                 res.append(label.id)
-        elif self._context.get('active_model') == 'product.product':
-            products = self.env[self._context.get('active_model')].browse(self._context.get('default_product_ids'))
+        elif active_model == 'product.product':
+            products = _datos
             for product in products:
                 label = self.env['print.product.label.line'].create({
                     'product_id': product.id,
                 })
                 res.append(label.id)
+        elif active_model == "purchase.order":
+            orders = _datos
+            for order in orders:
+                orders_line = order.order_line
+                for order_line in orders_line:
+                    _logger.info('order_line:' + str(order_line) + "|tipo:"+str(type(order_line)))
+
+                    # almacenar en BD la linea a imprimir
+                    label = self.env['print.product.label.line'].create({
+                        'product_id': order_line.product_id.id,
+                        'qty_initial': order_line.product_qty,
+                        'qty': order_line.product_qty
+                    })
+                    res.append(label.id)
+
+        else:
+            _logger.info('_get_products else - active_model:' + str(active_model))
+
         return res
+
 
     name = fields.Char(
         'Name',
