@@ -92,21 +92,12 @@
         context="{'default_product_ids': active_ids}"/>
 
     <act_window id="action_print_label_from_product_order"
-        name="Custom Product Labels"
+        name="Imprimir etiquetas"
         binding_model="purchase.order"
         res_model="print.product.label"
         view_mode="form,list"
         binding_type="report"
         target="current"
         context="{'default_product_ids': active_ids}"/>
-
-    <record model="ir.actions.act_window" id="action_purchase_list_product">
-        <field name="name">Impresion nueva</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">print.product.label</field>
-        <field name="view_mode">tree,form,list</field>
-        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
-        <field name="binding_type">report</field>
-    </record>
 
 </odoo>
