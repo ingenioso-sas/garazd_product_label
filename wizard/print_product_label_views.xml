@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-
-    <!-- <act_window
-        id="action_print_label_from_template"
-        name="Custom Product Labels"
-        binding_model="product.template"
-        res_model="print.product.label"
-        view_mode="form"
-        target="current"
-        binding_views="form"
-        context="{'default_product_ids': active_ids}"/> -->
-
     <record id="print_product_label_view_form" model="ir.ui.view">
         <field name="name">print.product.label.view.form</field>
         <field name="model">print.product.label</field>
         <field name="arch" type="xml">
             <form create="false" string="Print Product Labels">
                 <header>
-                    <button name="action_print" string="Print"
+                    <button
+                        name="action_print"
+                        string="Print"
                         help="Print product labels"
-                        type="object" icon="fa-print"
-                        class="btn-primary mt8 mb8"/>
-
+                        type="object"
+                        icon="fa-print"
+                        class="btn-primary mr8"
+                    />
                     <button
                         name="action_preview"
                         string="Preview"
                         help="Preview product labels"
                         type="object"
                         icon="fa-search"
-                        class="btn-secondary mr8"  />
-
+                        class="btn-secondary mr8"
+                    />
                 </header>
                 <div class="alert alert-info text-center mb-3"
                      attrs="{'invisible':[('message', '=', False)]}"
@@ -59,45 +51,59 @@
                         help="Set the quantity for each qty product."
                         type="object" class="btn-xs mr8 mb4"/>
                 </div>
-                <field name="label_ids" mode="tree">
-                    <tree editable="top" decoration-success="qty &gt; 0">
-                        <field name="selected"/>
-                        <field name="product_id"/>
-                        <field name="barcode" readonly="True"/>
-                        <button name="action_minus_qty" type="object" string="" icon="fa-minus"/>
-                        <field name="qty" sum="Total" />
-                        <button name="action_plus_qty" type="object" string="" icon="fa-plus"/>
-                    </tree>
-                </field>
+                <notebook>
+                    <page string="Labels">
+                        <field name="label_ids" mode="tree">
+                            <tree editable="top" decoration-muted="qty==0">
+                                <field name="selected"/>
+                                <field name="product_id"/>
+                                <field name="barcode" readonly="True"/>
+                                <button name="action_minus_qty" type="object" string="" icon="fa-minus"/>
+                                <field name="qty" sum="Total" />
+                                <button name="action_plus_qty" type="object" string="" icon="fa-plus"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Options">
+                        <group name="options" class="o_label_nowrap">
+                            <group>
+                                <field name="humanreadable" widget="boolean_toggle" />
+                                <field name="border_width" />
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
             </form>
         </field>
     </record>
 
-    <act_window id="action_print_label_from_template"
-        name="Custom Product Labels"
-        res_model="print.product.label"
-        binding_model="product.template"
-  		view_mode="form"
-        binding_type="report"
-        target="current"
-        context="{'default_product_ids': active_ids}"/>
+    <record id="action_print_label_from_template" model="ir.actions.act_window">
+        <field name="name">Custom Product Labels</field>
+        <field name="res_model">print.product.label</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'default_product_ids': active_ids}</field>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_type">report</field>
+    </record>
 
-    <act_window id="action_print_label_from_product"
-        name="Imprimir etiquetas de productos"
-        binding_model="product.product"
-        res_model="print.product.label"
-        view_mode="form"
-        binding_type="report"
-        target="current"
-        context="{'default_product_ids': active_ids}"/>
+    <record id="action_print_label_from_product" model="ir.actions.act_window">
+        <field name="name">Custom Product Labels</field>
+        <field name="res_model">print.product.label</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'default_product_ids': active_ids}</field>
+        <field name="binding_model_id" ref="product.model_product_product"/>
+        <field name="binding_type">report</field>
+    </record>
 
-    <act_window id="action_print_label_from_product_order"
-        name="Imprimir etiquetas"
-        binding_model="purchase.order"
-        res_model="print.product.label"
-        view_mode="form,list"
-        binding_type="report"
-        target="current"
-        context="{'default_product_ids': active_ids}"/>
-
+    <record id="action_print_label_from_purchase" model="ir.actions.act_window">
+        <field name="name">Imprimir etiquetas de productos</field>
+        <field name="res_model">print.product.label</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'default_product_ids': active_ids}</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

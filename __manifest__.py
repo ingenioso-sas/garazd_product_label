@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
-
-# Copyright (C) 2018-2020 Garazd Creation (<https://garazd.biz/>)
-# Author: Yurii Razumovskyi (<support@garazd.biz>)
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+# Copyright © 2018 Garazd Creation (<https://garazd.biz>)
+# @author: Yurii Razumovskyi (<support@garazd.biz>)
+# @author: Iryna Razumovska (<support@garazd.biz>)
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html).
 
 {
     'name': 'Custom Product Labels',
-    'version': '13.0.1.3.6',
-    'category': 'Product Management',
-    'author': 'Garazd Creation, Anderson Buitron',
-    'website': "https://garazd.biz",
+    'version': '15.0.1.0.1',
+    'category': 'Warehouse',
+    'author': 'Garazd Creation',
+    'website': 'https://garazd.biz',
     'license': 'LGPL-3',
-    'summary': """Print custom product labels with barcode""",
+    'summary': 'Print custom product labels with barcode',
     'images': ['static/description/banner.png'],
     'description': """
         Module allows to print custom product barcode labels and tags on different paper formats.

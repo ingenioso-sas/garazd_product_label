@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+# Copyright © 2018 Garazd Creation (<https://garazd.biz>)
+# @author: Yurii Razumovskyi (<support@garazd.biz>)
+# @author: Iryna Razumovska (<support@garazd.biz>)
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html).
 
 from odoo import api, fields, models, _
 from odoo.exceptions import Warning
@@ -86,6 +89,16 @@ class PrintProductLabel(models.TransientModel):
         string='Label quantity per product',
         default=1,
     )
+    # Options
+    humanreadable = fields.Boolean(
+        string='Human readable barcode',
+        help='Print digital code of barcode.',
+        default=False,
+    )
+    border_width = fields.Integer(
+        string='Border',
+        help='Border width for labels (in pixels). Set "0" for no border.'
+    )
 
     def action_print(self):
         """ Print labels """
@@ -94,6 +107,14 @@ class PrintProductLabel(models.TransientModel):
         if not labels:
             raise Warning(_('Nothing to print, set the quantity of labels in the table.'))
         return self.env.ref(self.template).with_context(discard_logo_check=True).report_action(labels)
+
+    def action_preview(self):
+        """ Preview labels """
+        self.ensure_one()
+        labels = self.label_ids.filtered('selected').mapped('id')
+        if not labels:
+            raise Warning(_('Nothing to preview, set the quantity of labels in the table.'))
+        return self.env.ref('%s_preview' % self.template).with_context(discard_logo_check=True).report_action(labels)
 
     def action_set_qty(self):
         self.ensure_one()
@@ -110,12 +131,4 @@ class PrintProductLabel(models.TransientModel):
     def action_set_product_available_qty(self):
         for label in self.label_ids:
             if label.product_id and label.product_id.free_qty:
-                label.update({'qty': label.product_id.free_qty})
-
-    def action_preview(self):
-        """ Preview labels """
-        self.ensure_one()
-        labels = self.label_ids.filtered('selected').mapped('id')
-        if not labels:
-            raise Warning(_('Nothing to preview, set the quantity of labels in the table.'))
-        return self.env.ref('%s_preview' % self.template).with_context(discard_logo_check=True).report_action(labels)
+                label.update({'qty': label.product_id.free_qty})    
