@@ -12,20 +12,25 @@
     'license': 'LGPL-3',
     'summary': 'Print custom product labels with barcode',
     'images': ['static/description/banner.png'],
-    'description': """
-        Module allows to print custom product barcode labels and tags on different paper formats.
-        This module include the one label template with size: 57x35mm, paperformat: 21 pcs per sheet, 57 x 32 cm.
-    """,
-    'depends': ['product', 'customized_barcode_generator'],
-    'data': [
-        'wizard/print_product_label_views.xml',
-        'report/product_label_templates.xml',
-        'report/product_label_templates_a4.xml',
-        'report/product_label_templates_25x25.xml',
-        'report/product_label_reports.xml',
-        'report/product_label_reports_a4.xml',
-        'report/product_label_reports_25x25.xml',
+    'live_test_url': 'https://garazd.biz/r/1Jw',
+    'depends': [
+        'product',
+        'purchase',
+        'customized_barcode_generator'
     ],
+    'data': [
+        'security/ir.model.access.csv',
+        'report/product_label_reports.xml',
+        'report/product_label_templates.xml',
+        'wizard/print_product_label_views.xml',
+        'report/product_label_reports_58x32.xml',
+        'report/product_label_templates_58x32.xml',
+    ],
+    'demo': [
+        'demo/product_demo.xml',
+    ],
+    'external_dependencies': {
+    },
     'support': 'support@garazd.biz',
     'application': False,
     'installable': True,

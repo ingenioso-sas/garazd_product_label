@@ -78,12 +78,13 @@ class PrintProductLabel(models.TransientModel):
     )
     template = fields.Selection(
         selection=[
-            ('garazd_product_label.report_product_label_A4_57x35', 'Label 57x35mm (A4: 21 pcs on sheet, 3x7)'),
-            ('garazd_product_label.report_product_label_custom_58x32', 'Label 58x32mm (custom: 1 pcs on sheet, 1x1)'),
-            ('garazd_product_label.report_product_label_custom_25x25', 'Label 25x25mm (custom: 1 pcs on sheet, 1x1)')
-        ],
+            ('garazd_product_label.report_product_label_A4_57x35',
+             'Label 57x35mm (A4: 21 pcs on a sheet, 3x7)'), 
+            ('garazd_product_label.report_product_label_custom_57x32', 
+             'Label 58x32mm (custom: 1 pcs on sheet, 1x1)'),
+            ],
         string='Label template',
-        default='garazd_product_label.report_product_label_custom_58x32',
+        default='garazd_product_label.report_product_label_A4_57x35',
     )
     qty_per_product = fields.Integer(
         string='Label quantity per product',

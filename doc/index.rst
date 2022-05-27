@@ -1,13 +1,14 @@
-Custom Product Label module documentation
-=========================================
+**Changelog**
+------------------------------
 
-Custom Product Label documentation topics
-'''''''''''''''''''''''''''''''''''''''''
+**15.0.1.0.1** 2022-02-04
 
-Changelog
-'''''''''
+- Add the label option "Border width"
 
-.. toctree::
-   :maxdepth: 1
+- Add the label option "Human readable barcode"
 
-   changelog.rst
+**15.0.1.0.0** 2021-12-08
+
+- Migration from 14.0
+
+
