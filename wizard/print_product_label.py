@@ -84,7 +84,7 @@ class PrintProductLabel(models.TransientModel):
              'Label 58x32mm (custom: 1 pcs on sheet, 1x1)'),
             ],
         string='Label template',
-        default='garazd_product_label.report_product_label_A4_57x35',
+        default='garazd_product_label.report_product_label_custom_57x32',
     )
     qty_per_product = fields.Integer(
         string='Label quantity per product',
