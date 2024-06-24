@@ -5,15 +5,21 @@
         <table class="table table-bordered col-xs-4"  style="margin-bottom: 0 !important;">
             <tr height="100%" style="border:0;margin:0;padding:0;">
                 <td class="col-xs-4 text-center" style="border:0;margin:0;padding:0;">
-                    <div style="overflow:hidden; height:16px !important; width: 100% !important; padding: 1px 1px 0; line-height: 0.8;">
+                    <div style="overflow: hidden; max-height:56px; width: 100% !important; padding: 0; line-height: 17px; display:inline; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow-wrap: break-word; word-wrap: break-word; hyphens: auto;">
                          <span t-field="label.product_id.name"/>
                     </div>
-                    <div style="width: 100%; padding: 0; margin: 0; font-size: 16px; font-weight: bold;">
-                        <div style="font-size: 8px; display:block;">(<span t-field="label.product_id.product_template_attribute_value_ids"/>)</div>
-						<span t-field="label.product_id.currency_id.symbol"/>
-                        <span t-field="label.product_id.lst_price"/>
+                    <div style="max-height: 18px !important; width: 100%; padding: 0; margin: 0; font-size: 16px; font-weight: bold; line-height: 17px;">
+                        <div t-if="label.product_id.product_template_attribute_value_ids" style="font-size: 13px; display:inline; float: left;">(<span t-field="label.product_id.product_template_attribute_value_ids"/>)</div>
+						<div style="text-align: -webkit-right;">
+                            <span t-field="label.product_id.currency_id.symbol"/>
+                            <span t-field="label.product_id.lst_price"/>
+                        </div>
                     </div>
-                    <img t-if="label.product_id.barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', label.product_id.barcode, 600, 100)" style="width:100%;height:13%;padding:3px 3px;"/>
+                    <img t-if="label.product_id.barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', label.product_id.barcode, 600, 150)" style="width:100%;max-height:30%;padding:0px 0px;" />
+                    <img alt="Barcode" t-if="label.product_id.barcode and len(label.product_id.barcode) == 8" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', label.product_id.barcode, 600, 150)" style="width:100%;height:44px;padding:0px 1px;"/>
+                    <div t-if="label.product_id.barcode" style="width: 100%; padding: 0; margin: 0; font-size: 0.9em;">
+                        <span t-field="label.product_id.barcode"/>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -22,24 +28,22 @@
     <template id="report_product_label_25x25x1_template">
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
-                <t t-set="count" t-value="0" />
-                <div class="page" style="position:absolute; left: -10px;">
-                    <div class="oe_structure"/>
-                    <t t-foreach="docs" t-as="label">
-                        <t t-set="qty" t-value="1" />
-                        <t t-if="label.qty">
-                            <t t-set="qty" t-value="label.qty" />
-                        </t>
-                        <t t-foreach="list(range(qty))" t-as="index_qty">
-                            <div style="width: 100%; float: left; height: 80%; margin: 0 0; padding: 0 0;">
+                <div class="oe_structure"/>
+                <t t-foreach="docs" t-as="label">
+                    <t t-set="qty" t-value="1" />
+                    <t t-if="label.qty">
+                        <t t-set="qty" t-value="label.qty" />
+                    </t>
+                    <t t-foreach="list(range(qty))" t-as="index_qty">
+                        <div class="page" style="left: -15px; position: relative;">
+                            <div style="width: 160px; margin: 0; height: 160px; max-height: 160px; padding: 0; border:solid 1px black;">
                                 <t t-call="garazd_product_label.label_25x25x1"/>
                             </div>
-                            <t t-set="count" t-value="count+1" />
-                            <div t-if="count % 1 == 0" style="page-break-after:always;"/>
-                            <div t-if="count % 1 == 0" style="clear:both;"/>
-                        </t>
+                        </div>
+                        <div style="clear:both;"/>
+                        <div style="page-break-after:always;"/>
                     </t>
-                </div>
+                </t>
             </t>
         </t>
     </template>
