@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0-20230607\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-18 06:54+0000\n"
-"PO-Revision-Date: 2024-08-18 06:54+0000\n"
+"POT-Creation-Date: 2024-08-18 18:47+0000\n"
+"PO-Revision-Date: 2024-08-18 18:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -49,16 +49,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__id
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__id
 msgid "ID"
-msgstr ""
-
-#. module: garazd_product_label
-#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product_order
-msgid "Print labels"
-msgstr ""
-
-#. module: garazd_product_label
-#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product
-msgid "Print product labels"
 msgstr ""
 
 #. module: garazd_product_label
@@ -185,6 +175,12 @@ msgid "Print Wizard"
 msgstr ""
 
 #. module: garazd_product_label
+#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product_order
+msgid "Print labels"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Print product labels"
 msgstr ""

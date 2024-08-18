@@ -54,16 +54,6 @@ msgid "ID"
 msgstr ""
 
 #. module: garazd_product_label
-#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product_order
-msgid "Print labels"
-msgstr ""
-
-#. module: garazd_product_label
-#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product
-msgid "Print product labels"
-msgstr ""
-
-#. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__qty_initial
 msgid "Initial Qty"
 msgstr ""
@@ -187,6 +177,12 @@ msgid "Print Wizard"
 msgstr ""
 
 #. module: garazd_product_label
+#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product_order
+msgid "Print labels"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Print product labels"
 msgstr ""
