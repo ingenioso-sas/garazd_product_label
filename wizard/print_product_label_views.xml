@@ -83,7 +83,7 @@
         context="{'default_product_ids': active_ids}"/>
 
     <act_window id="action_print_label_from_product"
-        name="Imprimir etiquetas de productos"
+        name="Print product labels"
         binding_model="product.product"
         res_model="print.product.label"
         view_mode="form"
@@ -92,7 +92,7 @@
         context="{'default_product_ids': active_ids}"/>
 
     <act_window id="action_print_label_from_product_order"
-        name="Imprimir etiquetas"
+        name="Print labels"
         binding_model="purchase.order"
         res_model="print.product.label"
         view_mode="form,list"
