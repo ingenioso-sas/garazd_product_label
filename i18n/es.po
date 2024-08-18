@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0-20230607\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-18 06:54+0000\n"
-"PO-Revision-Date: 2024-08-18 19:20+0000\n"
+"PO-Revision-Date: 2024-08-18 20:24+0000\n"
 "Last-Translator: Weblate Admin <weblate.admin@example.com>\n"
 "Language-Team: Spanish <http://weblate.example.com/projects/odin/"
 "garazd_product_label/es/>\n"
@@ -186,74 +186,74 @@ msgstr "Imprimir etiquetas"
 #: model:ir.actions.act_window,name:garazd_product_label.action_print_label_from_product
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Print product labels"
-msgstr ""
+msgstr "Imprimir etiquetas de productos"
 
 #. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__output
 msgid "Print to"
-msgstr ""
+msgstr "Imprimir en"
 
 #. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__product_id
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #. module: garazd_product_label
 #: model:ir.model,name:garazd_product_label.model_print_product_label
 msgid "Product Labels Wizard"
-msgstr ""
+msgstr "Asistente para etiquetas de productos"
 
 #. module: garazd_product_label
 #: model:ir.actions.report,name:garazd_product_label.report_product_label_custom_25x25
 msgid "Product labels 25x25mm"
-msgstr ""
+msgstr "Etiquetas de producto 25x25mm"
 
 #. module: garazd_product_label
 #: model:ir.actions.report,name:garazd_product_label.report_product_label_custom_25x25_preview
 msgid "Product labels 25x25mm (preview)"
-msgstr ""
+msgstr "Etiquetas de producto 25x25mm (vista previa)"
 
 #. module: garazd_product_label
 #: model:ir.actions.report,name:garazd_product_label.report_product_label_A4_57x35
 msgid "Product labels 57x35mm"
-msgstr ""
+msgstr "Etiquetas de producto 57x35mm"
 
 #. module: garazd_product_label
 #: model:ir.actions.report,name:garazd_product_label.report_product_label_custom_58x32
 msgid "Product labels 58x32mm"
-msgstr ""
+msgstr "Etiquetas de producto 58x32mm"
 
 #. module: garazd_product_label
 #: model:ir.actions.report,name:garazd_product_label.report_product_label_custom_58x32_preview
 msgid "Product labels 58x32mm (preview)"
-msgstr ""
+msgstr "Etiquetas de producto 58x32mm (vista previa)"
 
 #. module: garazd_product_label
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Restore initial quantity."
-msgstr ""
+msgstr "Restablecer la cantidad inicial."
 
 #. module: garazd_product_label
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Set a certain quantity for each line."
-msgstr ""
+msgstr "Fije una cantidad determinada para cada línea."
 
 #. module: garazd_product_label
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Set quantity"
-msgstr ""
+msgstr "Establecer cantidad"
 
 #. module: garazd_product_label
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Set the qty by quantity available"
-msgstr ""
+msgstr "Establecer cantidad disponible"
 
 #. module: garazd_product_label
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Set the quantity for each qty product."
-msgstr ""
+msgstr "Establecer la cantidad para cada producto."
 
 #. module: garazd_product_label
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Total"
-msgstr ""
+msgstr "Total"
