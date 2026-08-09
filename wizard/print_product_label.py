@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
-from odoo.exceptions import Warning
-import logging
+from odoo.exceptions import UserError
 
-_logger = logging.getLogger(__name__)
+SUPPORTED_MODELS = ('product.template', 'product.product', 'purchase.order')
+
 
 class PrintProductLabel(models.TransientModel):
     _name = "print.product.label"
@@ -12,61 +12,37 @@ class PrintProductLabel(models.TransientModel):
 
     @api.model
     def _get_products(self):
-        res = []
+        label_lines = []
 
         active_model = self._context.get('active_model')
-        _logger.info('active_model:' + str(active_model))
+        record_ids = self._context.get('active_ids') or self._context.get('default_product_ids')
 
-        _datos = self.env[active_model].browse(self._context.get('default_product_ids'))
+        if active_model not in SUPPORTED_MODELS:
+            raise UserError(
+                _('Printing product labels is only supported from products and purchase orders.')
+            )
+
+        records = self.env[active_model].browse(record_ids)
 
         if active_model == 'product.template':
-            products = _datos
-            for product in products:
-                label = self.env['print.product.label.line'].create({
-                    'product_id': product.product_variant_id.id,
-                })
-                res.append(label.id)
+            for template in records:
+                for product in template.product_variant_ids:
+                    label_lines.append((0, 0, {'product_id': product.id}))
         elif active_model == 'product.product':
-            products = _datos
-            for product in products:
-                label = self.env['print.product.label.line'].create({
-                    'product_id': product.id,
-                })
-                res.append(label.id)
-        elif active_model == "purchase.order":
-            orders = _datos
-            for order in orders:
-                orders_line = order.order_line
-                for order_line in orders_line:
-                    _logger.info('order_line:' + str(order_line) + "|tipo:"+str(type(order_line)))
+            for product in records:
+                label_lines.append((0, 0, {'product_id': product.id}))
+        elif active_model == 'purchase.order':
+            for order in records:
+                for line in order.order_line.filtered(
+                        lambda line: line.product_id and line.product_qty > 0):
+                    label_lines.append((0, 0, {
+                        'product_id': line.product_id.id,
+                        'qty_initial': line.product_qty,
+                        'qty': line.product_qty,
+                    }))
 
-                    # almacenar en BD la linea a imprimir
-                    label = self.env['print.product.label.line'].create({
-                        'product_id': order_line.product_id.id,
-                        'qty_initial': order_line.product_qty,
-                        'qty': order_line.product_qty
-                    })
-                    res.append(label.id)
+        return label_lines
 
-        else:
-            _logger.info('_get_products else - active_model:' + str(active_model))
-
-        return res
-
-
-    name = fields.Char(
-        'Name',
-        default='Print product labels',
-    )
-    message = fields.Char(
-        'Message',
-        readonly=True,
-    )
-    output = fields.Selection(
-        selection=[('pdf', 'PDF')],
-        string='Print to',
-        default='pdf',
-    )
     label_ids = fields.One2many(
         comodel_name='print.product.label.line',
         inverse_name='wizard_id',
@@ -92,30 +68,27 @@ class PrintProductLabel(models.TransientModel):
         self.ensure_one()
         labels = self.label_ids.filtered('selected').mapped('id')
         if not labels:
-            raise Warning(_('Nothing to print, set the quantity of labels in the table.'))
+            raise UserError(_('Nothing to print, set the quantity of labels in the table.'))
         return self.env.ref(self.template).with_context(discard_logo_check=True).report_action(labels)
 
     def action_set_qty(self):
         self.ensure_one()
         self.label_ids.write({'qty': self.qty_per_product})
 
-
     def action_restore_initial_qty(self):
         self.ensure_one()
-        for label in self.label_ids:
-            if label.qty_initial:
-                label.update({'qty': label.qty_initial})
-
+        for label in self.label_ids.filtered('qty_initial'):
+            label.qty = label.qty_initial
 
     def action_set_product_available_qty(self):
         for label in self.label_ids:
-            if label.product_id and label.product_id.free_qty:
-                label.update({'qty': label.product_id.free_qty})
+            if label.product_id:
+                label.qty = max(0, int(label.product_id.free_qty or 0))
 
     def action_preview(self):
         """ Preview labels """
         self.ensure_one()
         labels = self.label_ids.filtered('selected').mapped('id')
         if not labels:
-            raise Warning(_('Nothing to preview, set the quantity of labels in the table.'))
+            raise UserError(_('Nothing to preview, set the quantity of labels in the table.'))
         return self.env.ref('%s_preview' % self.template).with_context(discard_logo_check=True).report_action(labels)

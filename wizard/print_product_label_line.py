@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class PrintProductLabelLine(models.TransientModel):
@@ -21,16 +21,13 @@ class PrintProductLabelLine(models.TransientModel):
     @api.depends('qty')
     def _compute_selected(self):
         for record in self:
-            if record.qty > 0:
-                record.update({'selected': True})
-            else:
-                record.update({'selected': False})
+            record.selected = record.qty > 0
 
     def action_plus_qty(self):
         for record in self:
-            record.update({'qty': record.qty + 1})
+            record.qty += 1
 
     def action_minus_qty(self):
         for record in self:
             if record.qty > 0:
-                record.update({'qty': record.qty - 1})
+                record.qty -= 1

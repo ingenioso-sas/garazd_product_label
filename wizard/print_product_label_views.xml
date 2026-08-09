@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-
-    <!-- <act_window
-        id="action_print_label_from_template"
-        name="Custom Product Labels"
-        binding_model="product.template"
-        res_model="print.product.label"
-        view_mode="form"
-        target="current"
-        binding_views="form"
-        context="{'default_product_ids': active_ids}"/> -->
-
     <record id="print_product_label_view_form" model="ir.ui.view">
         <field name="name">print.product.label.view.form</field>
         <field name="model">print.product.label</field>
@@ -32,18 +21,8 @@
                         class="btn-secondary mr8"  />
 
                 </header>
-                <div class="alert alert-info text-center mb-3"
-                     attrs="{'invisible':[('message', '=', False)]}"
-                     role="alert">
-                    <field name="message"/>
-                </div>
                 <group name="settings">
-                    <group name="global">
-                        <field name="output" widget="radio" options="{'horizontal': true}"/>
-                    </group>
-                    <group name="pdf" attrs="{'invisible':[('output', '!=', 'pdf')]}">
-                        <field name="template" string="Label template" widget="radio"/>
-                    </group>
+                    <field name="template" string="Label template" widget="radio"/>
                 </group>
                 <div>
                     <field name="qty_per_product" class="oe_left mr8"
@@ -77,10 +56,9 @@
         name="Custom Product Labels"
         res_model="print.product.label"
         binding_model="product.template"
-  		view_mode="form"
+        view_mode="form"
         binding_type="report"
-        target="current"
-        context="{'default_product_ids': active_ids}"/>
+        target="current"/>
 
     <act_window id="action_print_label_from_product"
         name="Print product labels"
@@ -88,16 +66,14 @@
         res_model="print.product.label"
         view_mode="form"
         binding_type="report"
-        target="current"
-        context="{'default_product_ids': active_ids}"/>
+        target="current"/>
 
     <act_window id="action_print_label_from_product_order"
         name="Print labels"
         binding_model="purchase.order"
         res_model="print.product.label"
-        view_mode="form,list"
+        view_mode="form"
         binding_type="report"
-        target="current"
-        context="{'default_product_ids': active_ids}"/>
+        target="current"/>
 
 </odoo>
