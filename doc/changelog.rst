@@ -3,6 +3,11 @@
 Changelog
 =========
 
+`13.0.1.9.0`
+--------
+
+- [ADD] Rejilla A4 personalizable (filas/columnas) desde la vista de impresion (porcentajes, sin dimensionado exacto). Default 3x7 como antes.
+
 `13.0.1.4.0`
 --------
 

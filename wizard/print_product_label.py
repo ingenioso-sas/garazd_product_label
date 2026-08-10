@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 SUPPORTED_MODELS = ('product.template', 'product.product', 'purchase.order')
 
@@ -62,6 +62,29 @@ class PrintProductLabel(models.TransientModel):
         string='Label quantity per product',
         default=1,
     )
+    columns = fields.Integer(
+        string='Grid columns',
+        default=3,
+        help="Number of label columns on large sheets (e.g. A4).",
+    )
+    rows = fields.Integer(
+        string='Grid rows',
+        default=7,
+        help="Number of label rows on large sheets (e.g. A4).",
+    )
+
+    @api.constrains('columns', 'rows')
+    def _check_grid(self):
+        for record in self:
+            if record.columns < 1 or record.rows < 1:
+                raise ValidationError(_('Grid columns and rows must be at least 1.'))
+
+    def _get_print_data(self):
+        """Pass grid configuration only for the A4 grid report."""
+        self.ensure_one()
+        if self.template == 'garazd_product_label.report_product_label_A4_57x35':
+            return {'columns': self.columns, 'rows': self.rows}
+        return None
 
     def action_print(self):
         """ Print labels """
@@ -69,7 +92,8 @@ class PrintProductLabel(models.TransientModel):
         labels = self.label_ids.filtered('selected').mapped('id')
         if not labels:
             raise UserError(_('Nothing to print, set the quantity of labels in the table.'))
-        return self.env.ref(self.template).with_context(discard_logo_check=True).report_action(labels)
+        return self.env.ref(self.template).with_context(
+            discard_logo_check=True).report_action(labels, data=self._get_print_data())
 
     def action_set_qty(self):
         self.ensure_one()
@@ -91,4 +115,5 @@ class PrintProductLabel(models.TransientModel):
         labels = self.label_ids.filtered('selected').mapped('id')
         if not labels:
             raise UserError(_('Nothing to preview, set the quantity of labels in the table.'))
-        return self.env.ref('%s_preview' % self.template).with_context(discard_logo_check=True).report_action(labels)
+        return self.env.ref('%s_preview' % self.template).with_context(
+            discard_logo_check=True).report_action(labels, data=self._get_print_data())
