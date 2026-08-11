@@ -3,6 +3,11 @@
 Changelog
 =========
 
+`13.0.1.9.1`
+--------
+
+- [ADD] Rejilla configurable tambien para la etiqueta 25x25mm (porcentajes, default 1x1 = comportamiento anterior). Los campos Columns/Rows se muestran para A4 y 25x25, y cambian de default al seleccionar el template (A4: 3x7, otros: 1x1).
+
 `13.0.1.9.0`
 --------
 

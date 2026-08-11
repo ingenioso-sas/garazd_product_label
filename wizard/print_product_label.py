@@ -64,14 +64,23 @@ class PrintProductLabel(models.TransientModel):
     )
     columns = fields.Integer(
         string='Grid columns',
-        default=3,
-        help="Number of label columns on large sheets (e.g. A4).",
+        default=1,
+        help="Number of label columns on the sheet (e.g. A4: 3).",
     )
     rows = fields.Integer(
         string='Grid rows',
-        default=7,
-        help="Number of label rows on large sheets (e.g. A4).",
+        default=1,
+        help="Number of label rows on the sheet (e.g. A4: 7).",
     )
+
+    @api.onchange('template')
+    def _onchange_template_grid(self):
+        if self.template == 'garazd_product_label.report_product_label_A4_57x35':
+            self.columns = 3
+            self.rows = 7
+        else:
+            self.columns = 1
+            self.rows = 1
 
     @api.constrains('columns', 'rows')
     def _check_grid(self):
@@ -80,9 +89,11 @@ class PrintProductLabel(models.TransientModel):
                 raise ValidationError(_('Grid columns and rows must be at least 1.'))
 
     def _get_print_data(self):
-        """Pass grid configuration only for the A4 grid report."""
+        """Pass grid configuration for the grid reports (A4 and 25x25)."""
         self.ensure_one()
-        if self.template == 'garazd_product_label.report_product_label_A4_57x35':
+        if self.template in (
+                'garazd_product_label.report_product_label_A4_57x35',
+                'garazd_product_label.report_product_label_custom_25x25'):
             return {'columns': self.columns, 'rows': self.rows}
         return None
 
