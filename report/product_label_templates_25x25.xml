@@ -2,17 +2,18 @@
 <odoo>
 
     <template id="label_25x25x1">
+        <t t-set="font_scale" t-value="font_scale or 1.0"/>
         <table style="width: 100% !important; height: 100% !important; margin: 0 !important; padding: 0 !important; font-family: 'Lato-Bol'; table-layout: fixed; border-spacing: 0; border-collapse: collapse;">
             <tr height="100%" style="border: 0 !important; margin: 0 !important; padding: 0 !important;">
                 <td class="text-center" style="border: 0 !important; margin: 0 !important; padding: 0 !important; width: 100% !important; height: 100% !important; vertical-align: middle; text-align: center;">
-                    <div style="overflow: hidden; max-height:28px; font-size: 9.1px; width: 100% !important; padding: 0; line-height: 9.8px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; word-break: break-word; hyphens: auto; text-align: center; -webkit-box-pack: center; -webkit-box-align: center;">
+                    <div t-attf-style="overflow: hidden; max-height: #{3 * 9.8 * font_scale}px; font-size: #{9.1 * font_scale}px; width: 100% !important; padding: 0; line-height: #{9.8 * font_scale}px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; word-break: break-word; hyphens: auto; text-align: center; -webkit-box-pack: center; -webkit-box-align: center;">
                         <span t-field="label.product_id.name"/>
                         <span style="white-space: nowrap; display: inline;">(<span t-esc="label.product_id.get_cost_in_code()[:-3]"/>.<span t-esc="(label.write_date.strftime('%y0%m0%d'))"/>)</span>
-                        <span t-if="label.product_id.product_template_attribute_value_ids" style="font-size: 7px; display:inline;">[<span t-field="label.product_id.product_template_attribute_value_ids"/>]</span>
+                        <span t-if="label.product_id.product_template_attribute_value_ids" t-attf-style="font-size: #{7 * font_scale}px; display:inline;">[<span t-field="label.product_id.product_template_attribute_value_ids"/>]</span>
                     </div>
-                    <div style="width: 100%; padding: 0; margin: 0; font-weight: bold; font-size: 11.2px; line-height: 14px; max-height: 24px !important; text-align: center;">
+                    <div t-attf-style="width: 100%; padding: 0; margin: 0; font-weight: bold; font-size: #{11.2 * font_scale}px; line-height: #{14 * font_scale}px; max-height: 24px !important; text-align: center;">
                         <span t-field="label.product_id.currency_id.symbol"/>
-                        <span t-field="label.product_id.lst_price" style="font-size: 15.4px; vertical-align: bottom;" />
+                        <span t-field="label.product_id.lst_price" t-attf-style="font-size: #{15.4 * font_scale}px; vertical-align: bottom;" />
                     </div>
                     <div t-if="label.product_id.barcode and len(label.product_id.barcode) == 13" t-field="label.product_id.barcode" t-options="{'widget': 'barcode', 'symbology': 'EAN13', 'width': int(b_width), 'height': int(b_height), 'img_style': 'width:100%; height:9.5mm; padding:0px; margin: 0 auto; display: block;', 'img_alt': 'Barcode'}" style="text-align: center; width: 100%; display: block;"/>
                     <div t-elif="label.product_id.barcode and len(label.product_id.barcode) == 8" t-field="label.product_id.barcode" t-options="{'widget': 'barcode', 'symbology': 'EAN8', 'width': int(b_width), 'height': int(b_height), 'img_style': 'width:100%; height:9.5mm; padding:0px; margin: 0 auto; display: block;', 'img_alt': 'Barcode'}" style="text-align: center; width: 100%; display: block;"/>
@@ -37,6 +38,7 @@
             </style>
             <t t-set="columns" t-value="columns or 1"/>
             <t t-set="rows" t-value="rows or 1"/>
+            <t t-set="font_scale" t-value="font_scale or 1.0"/>
             <t t-set="label_docs" t-value="docs or env['print.product.label.line'].browse(env.context.get('active_ids', []))"/>
             <t t-set="b_width" t-value="600"/>
             <t t-set="b_height" t-value="180"/>

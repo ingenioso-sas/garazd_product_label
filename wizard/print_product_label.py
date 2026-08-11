@@ -87,6 +87,12 @@ class PrintProductLabel(models.TransientModel):
         default=1.0,
         help="Margin around the label content in mm.",
     )
+    font_scale = fields.Float(
+        string='Font scale',
+        default=1.0,
+        help="Scale factor for the main text and price font size on the label. "
+             "1.0 = current size, 0.6 = 60% of the current size.",
+    )
 
     @api.onchange('template')
     def _onchange_template_grid(self):
@@ -110,6 +116,7 @@ class PrintProductLabel(models.TransientModel):
             'barcode_width': self.barcode_width or 600,
             'barcode_height': self.barcode_height or 180,
             'label_margin': self.label_margin,
+            'font_scale': self.font_scale or 1.0,
         }
         if self.template in (
                 'garazd_product_label.report_product_label_A4_57x35',

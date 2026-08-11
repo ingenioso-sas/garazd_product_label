@@ -36,9 +36,10 @@
                 <group name="barcode_settings" string="Layout &amp; Barcode Settings">
                     <group>
                         <field name="label_margin"/>
-                        <field name="barcode_width"/>
+                        <field name="font_scale"/>
                     </group>
                     <group>
+                        <field name="barcode_width"/>
                         <field name="barcode_height"/>
                     </group>
                 </group>
