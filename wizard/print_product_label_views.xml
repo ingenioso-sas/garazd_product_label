@@ -33,8 +33,9 @@
                         <field name="rows"/>
                     </group>
                 </group>
-                <group name="barcode_settings" string="Barcode Settings">
+                <group name="barcode_settings" string="Layout &amp; Barcode Settings">
                     <group>
+                        <field name="label_margin"/>
                         <field name="barcode_width"/>
                     </group>
                     <group>

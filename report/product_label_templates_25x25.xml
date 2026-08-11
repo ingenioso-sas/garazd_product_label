@@ -58,7 +58,7 @@
                     <t t-foreach="list(range(qty))" t-as="index_qty">
                         <div t-if="count % total == 0 and count" style="page-break-after:always;"/>
                         <div t-if="count % columns == 0 and count" style="clear:both;"/>
-                        <div class="page" t-attf-style="width: #{100.0 / columns}% !important; height: #{100.0 / rows}% !important; float: left; box-sizing: border-box; overflow: hidden; margin: 0 !important; padding: 0 !important;">
+                        <div class="page" t-attf-style="width: #{100.0 / columns}% !important; height: #{100.0 / rows}% !important; float: left; box-sizing: border-box; overflow: hidden; margin: 0 !important; padding: #{label_margin}mm !important;">
                             <t t-call="garazd_product_label.label_25x25x1"/>
                         </div>
                         <t t-set="count" t-value="count+1" />

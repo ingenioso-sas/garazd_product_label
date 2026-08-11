@@ -82,6 +82,11 @@ class PrintProductLabel(models.TransientModel):
         default=180,
         help="Height of the generated barcode image in pixels.",
     )
+    label_margin = fields.Float(
+        string='Label Margin (mm)',
+        default=1.0,
+        help="Margin around the label content in mm.",
+    )
 
     @api.onchange('template')
     def _onchange_template_grid(self):
@@ -104,6 +109,7 @@ class PrintProductLabel(models.TransientModel):
         data = {
             'barcode_width': self.barcode_width or 600,
             'barcode_height': self.barcode_height or 180,
+            'label_margin': self.label_margin,
         }
         if self.template in (
                 'garazd_product_label.report_product_label_A4_57x35',
