@@ -6,7 +6,7 @@ Changelog
 `13.0.1.11.0`
 --------
 
-- [FIX] Temporal: en la etiqueta 25x25mm el codigo de barras vuelve a generarse por URL (`/report/barcode/...`) en lugar del widget base64, para reducir el consumo de memoria de wkhtmltopdf al imprimir muchas etiquetas en contenedores con limite de memoria bajo (p. ej. 800MB). El widget base64 se restaura cuando se resuelva el limite de memoria del contenedor.
+- [FIX] Temporal: el codigo de barras vuelve a generarse por URL (`/report/barcode/...`) con `web_base_url` absoluto en las tres etiquetas (25x25, 58x32 y 57x35 A4), en lugar del widget base64, para reducir el consumo de memoria de wkhtmltopdf al imprimir muchas etiquetas en contenedores con limite de memoria bajo (p. ej. 800MB). El widget base64 se restaura cuando se resuelva el limite de memoria del contenedor.
 
 `13.0.1.10.0`
 --------
