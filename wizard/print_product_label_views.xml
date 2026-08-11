@@ -33,6 +33,14 @@
                         <field name="rows"/>
                     </group>
                 </group>
+                <group name="barcode_settings" string="Barcode Settings">
+                    <group>
+                        <field name="barcode_width"/>
+                    </group>
+                    <group>
+                        <field name="barcode_height"/>
+                    </group>
+                </group>
                 <div>
                     <field name="qty_per_product" class="oe_left mr8"
                         help="Label quantity per product"

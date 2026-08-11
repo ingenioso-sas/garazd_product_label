@@ -72,6 +72,16 @@ class PrintProductLabel(models.TransientModel):
         default=1,
         help="Number of label rows on the sheet (e.g. A4: 7).",
     )
+    barcode_width = fields.Integer(
+        string='Barcode Width (px)',
+        default=600,
+        help="Width of the generated barcode image in pixels.",
+    )
+    barcode_height = fields.Integer(
+        string='Barcode Height (px)',
+        default=180,
+        help="Height of the generated barcode image in pixels.",
+    )
 
     @api.onchange('template')
     def _onchange_template_grid(self):
@@ -91,11 +101,15 @@ class PrintProductLabel(models.TransientModel):
     def _get_print_data(self):
         """Pass grid configuration for the grid reports (A4 and 25x25)."""
         self.ensure_one()
+        data = {
+            'barcode_width': self.barcode_width or 600,
+            'barcode_height': self.barcode_height or 180,
+        }
         if self.template in (
                 'garazd_product_label.report_product_label_A4_57x35',
                 'garazd_product_label.report_product_label_custom_25x25'):
-            return {'columns': self.columns, 'rows': self.rows}
-        return None
+            data.update({'columns': self.columns, 'rows': self.rows})
+        return data
 
     def action_print(self):
         """ Print labels """
