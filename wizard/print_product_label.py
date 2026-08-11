@@ -120,6 +120,7 @@ class PrintProductLabel(models.TransientModel):
         }
         if self.template in (
                 'garazd_product_label.report_product_label_A4_57x35',
+                'garazd_product_label.report_product_label_custom_58x32',
                 'garazd_product_label.report_product_label_custom_25x25'):
             data.update({'columns': self.columns, 'rows': self.rows})
         return data

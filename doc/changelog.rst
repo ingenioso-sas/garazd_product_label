@@ -3,6 +3,13 @@
 Changelog
 =========
 
+`13.0.1.10.0`
+--------
+
+- [IMP] Se unifica el esquema de las etiquetas 58x32mm y 57x35mm (A4) con el de la 25x25mm: escalado automatico de letra con `font_scale`, parametros configurables (margen, rejilla, ancho/alto de codigo de barras), codigo de barras embebido en base64 via widget QWeb, y margenes de paperformat a 0 (el margen se controla por parametro).
+- [ADD] La rejilla (columnas/filas) ahora tambien es configurable para la etiqueta 58x32mm.
+- [I18N] Se actualizan el archivo `.pot` y la traduccion al espanol con las nuevas cadenas.
+
 `13.0.1.9.1`
 --------
 

@@ -24,8 +24,7 @@
                 <group name="settings">
                     <field name="template" string="Label template" widget="radio"/>
                 </group>
-                <group name="grid" string="Label grid"
-                    invisible="[('template', '=', 'garazd_product_label.report_product_label_custom_58x32')]">
+                <group name="grid" string="Label grid">
                     <group>
                         <field name="columns"/>
                     </group>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0-20230607\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-18 18:47+0000\n"
-"PO-Revision-Date: 2024-08-18 18:47+0000\n"
+"POT-Creation-Date: 2026-08-11 12:00+0000\n"
+"PO-Revision-Date: 2026-08-11 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,29 @@ msgstr ""
 #. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__barcode
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.label_25x25x1
+#: model_terms:ir.ui.view,arch_db:garazd_product_label.label_57x35_a4
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.label_58x32
 msgid "Barcode"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,help:garazd_product_label.field_print_product_label__barcode_height
+msgid "Height of the generated barcode image in pixels."
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__barcode_height
+msgid "Barcode Height (px)"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,help:garazd_product_label.field_print_product_label__barcode_width
+msgid "Width of the generated barcode image in pixels."
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__barcode_width
+msgid "Barcode Width (px)"
 msgstr ""
 
 #. module: garazd_product_label
@@ -46,6 +67,36 @@ msgid "Display Name"
 msgstr ""
 
 #. module: garazd_product_label
+#: model:ir.model.fields,help:garazd_product_label.field_print_product_label__font_scale
+msgid "Scale factor for the main text and price font size on the label. 1.0 = current size, 0.6 = 60% of the current size."
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__font_scale
+msgid "Font scale"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,help:garazd_product_label.field_print_product_label__columns
+msgid "Number of label columns on the sheet (e.g. A4: 3)."
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__columns
+msgid "Grid columns"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__rows
+msgid "Grid rows"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,help:garazd_product_label.field_print_product_label__rows
+msgid "Number of label rows on the sheet (e.g. A4: 7)."
+msgstr ""
+
+#. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__id
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__id
 msgid "ID"
@@ -59,6 +110,26 @@ msgstr ""
 #. module: garazd_product_label
 #: model:ir.model.fields,help:garazd_product_label.field_print_product_label_line__barcode
 msgid "International Article Number used for product identification."
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__label_ids
+msgid "Labels for Products"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__qty
+msgid "Label Qty"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,help:garazd_product_label.field_print_product_label__label_margin
+msgid "Margin around the label content in mm."
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__label_margin
+msgid "Label Margin (mm)"
 msgstr ""
 
 #. module: garazd_product_label
@@ -77,11 +148,6 @@ msgid "Label 58x32mm (custom: 1 pcs on sheet, 1x1)"
 msgstr ""
 
 #. module: garazd_product_label
-#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__qty
-msgid "Label Qty"
-msgstr ""
-
-#. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__qty_per_product
 #: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
 msgid "Label quantity per product"
@@ -94,8 +160,13 @@ msgid "Label template"
 msgstr ""
 
 #. module: garazd_product_label
-#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__label_ids
-msgid "Labels for Products"
+#: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
+msgid "Label grid"
+msgstr ""
+
+#. module: garazd_product_label
+#: model_terms:ir.ui.view,arch_db:garazd_product_label.print_product_label_view_form
+msgid "Layout & Barcode Settings"
 msgstr ""
 
 #. module: garazd_product_label
@@ -122,30 +193,23 @@ msgid "Line with Product Label Data"
 msgstr ""
 
 #. module: garazd_product_label
-#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__message
-msgid "Message"
-msgstr ""
-
-#. module: garazd_product_label
-#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__name
-msgid "Name"
+#: code:addons/garazd_product_label/wizard/print_product_label.py:0
+msgid "Grid columns and rows must be at least 1."
 msgstr ""
 
 #. module: garazd_product_label
 #: code:addons/garazd_product_label/wizard/print_product_label.py:0
-#, python-format
 msgid "Nothing to preview, set the quantity of labels in the table."
 msgstr ""
 
 #. module: garazd_product_label
 #: code:addons/garazd_product_label/wizard/print_product_label.py:0
-#, python-format
 msgid "Nothing to print, set the quantity of labels in the table."
 msgstr ""
 
 #. module: garazd_product_label
-#: model:ir.model.fields.selection,name:garazd_product_label.selection__print_product_label__output__pdf
-msgid "PDF"
+#: code:addons/garazd_product_label/wizard/print_product_label.py:0
+msgid "Printing product labels is only supported from products and purchase orders."
 msgstr ""
 
 #. module: garazd_product_label
@@ -186,11 +250,6 @@ msgid "Print product labels"
 msgstr ""
 
 #. module: garazd_product_label
-#: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__output
-msgid "Print to"
-msgstr ""
-
-#. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label_line__product_id
 msgid "Product"
 msgstr ""
@@ -213,6 +272,11 @@ msgstr ""
 #. module: garazd_product_label
 #: model:ir.actions.report,name:garazd_product_label.report_product_label_A4_57x35
 msgid "Product labels 57x35mm"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.actions.report,name:garazd_product_label.report_product_label_A4_57x35_preview
+msgid "Product labels 57x35mm (preview)"
 msgstr ""
 
 #. module: garazd_product_label

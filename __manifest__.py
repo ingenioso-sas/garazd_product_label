@@ -6,7 +6,7 @@
 
 {
     'name': 'Custom Product Labels',
-    'version': '13.0.1.9.1',
+    'version': '13.0.1.10.0',
     'category': 'Product Management',
     'author': 'Garazd Creation, Anderson Buitron',
     'website': "https://garazd.biz",
