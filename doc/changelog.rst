@@ -3,6 +3,11 @@
 Changelog
 =========
 
+`13.0.1.12.0`
+--------
+
+- [PERF] Se cachea el resultado de `get_cost_in_code()` por producto en las etiquetas 25x25 y 58x32. Antes se ejecutaban 2 consultas SQL por etiqueta (1000 etiquetas = 2000 consultas); ahora solo 1 por producto distinto. Acelera la generacion del HTML al imprimir muchas etiquetas del mismo producto.
+
 `13.0.1.11.0`
 --------
 
