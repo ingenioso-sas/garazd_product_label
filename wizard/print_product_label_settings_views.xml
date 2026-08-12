@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_product_label" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.product.label</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Product Labels" string="Product Labels" data-key="garazd_product_label" groups="base.group_system">
+                    <h2>Product Labels</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left">
+                                <label string="Label batch size" for="label_batch_size"/>
+                            </div>
+                            <div class="o_setting_right">
+                                <div class="text-muted">
+                                    Number of labels rendered per batch to limit RAM/CPU
+                                    usage. Set 0 to print all at once.
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="label_batch_size" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

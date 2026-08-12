@@ -113,8 +113,29 @@ msgid "International Article Number used for product identification."
 msgstr ""
 
 #. module: garazd_product_label
+#: model:ir.model.fields,field_description:garazd_product_label.field_res_config_settings__label_batch_size
+#: model_terms:ir.ui.view,arch_db:garazd_product_label.res_config_settings_view_form_product_label
+msgid "Label batch size"
+msgstr ""
+
+#. module: garazd_product_label
 #: model:ir.model.fields,field_description:garazd_product_label.field_print_product_label__label_ids
 msgid "Labels for Products"
+msgstr ""
+
+#. module: garazd_product_label
+#: model:ir.model.fields,help:garazd_product_label.field_res_config_settings__label_batch_size
+msgid "Number of labels rendered per batch when printing product labels. Batching limits RAM/CPU usage by rendering several smaller PDFs and merging them. Set to 0 to print all labels in one go."
+msgstr ""
+
+#. module: garazd_product_label
+#: model_terms:ir.ui.view,arch_db:garazd_product_label.res_config_settings_view_form_product_label
+msgid "Number of labels rendered per batch to limit RAM/CPU usage. Set 0 to print all at once."
+msgstr ""
+
+#. module: garazd_product_label
+#: model_terms:ir.ui.view,arch_db:garazd_product_label.res_config_settings_view_form_product_label
+msgid "Product Labels"
 msgstr ""
 
 #. module: garazd_product_label

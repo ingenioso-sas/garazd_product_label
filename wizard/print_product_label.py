@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import base64
+import io
+
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
+from PyPDF2 import PdfFileReader, PdfFileWriter
 
 SUPPORTED_MODELS = ('product.template', 'product.product', 'purchase.order')
 
@@ -125,14 +129,70 @@ class PrintProductLabel(models.TransientModel):
             data.update({'columns': self.columns, 'rows': self.rows})
         return data
 
+    def _get_batch_size(self):
+        """Batch size configured in res.config.settings (0 = no batching)."""
+        param = self.env['ir.config_parameter'].sudo().get_param('label_batch_size', default='0')
+        try:
+            return max(0, int(param))
+        except (TypeError, ValueError):
+            return 0
+
+    @staticmethod
+    def _merge_pdf_contents(contents):
+        """Merge a list of raw PDF bytes into a single PDF using PyPDF2."""
+        if not contents:
+            return b''
+        if len(contents) == 1:
+            return contents[0]
+        writer = PdfFileWriter()
+        for content in contents:
+            reader = PdfFileReader(io.BytesIO(content))
+            writer.appendPagesFromReader(reader)
+        out = io.BytesIO()
+        writer.write(out)
+        return out.getvalue()
+
+    def _render_pdf(self, label_ids):
+        """Render a PDF for the given label ids and return the raw PDF bytes."""
+        report = self.env.ref(self.template)
+        result, _ = report.with_context(discard_logo_check=True).render_qweb_pdf(
+            label_ids, data=self._get_print_data())
+        return result
+
     def action_print(self):
         """ Print labels """
         self.ensure_one()
         labels = self.label_ids.filtered('selected').mapped('id')
         if not labels:
             raise UserError(_('Nothing to print, set the quantity of labels in the table.'))
-        return self.env.ref(self.template).with_context(
-            discard_logo_check=True).report_action(labels, data=self._get_print_data())
+        batch_size = self._get_batch_size()
+        if not batch_size:
+            return self.env.ref(self.template).with_context(
+                discard_logo_check=True).report_action(labels, data=self._get_print_data())
+
+        # Procesamiento por lotes: renderiza PDFs mas pequenos y los une, para
+        # limitar el consumo de RAM/CPU al imprimir muchas etiquetas.
+        pdf_contents = []
+        for i in range(0, len(labels), batch_size):
+            batch_ids = labels[i:i + batch_size]
+            pdf_contents.append(self._render_pdf(batch_ids))
+
+        merged = self._merge_pdf_contents(pdf_contents)
+
+        # Guardar el PDF unido como attachment y devolver la accion de descarga.
+        attachment = self.env['ir.attachment'].create({
+            'name': 'product_labels.pdf',
+            'type': 'binary',
+            'mimetype': 'application/pdf',
+            'datas': base64.b64encode(merged),
+            'res_model': self._name,
+            'res_id': self.id,
+        })
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/%s?download=true' % attachment.id,
+            'target': 'self',
+        }
 
     def action_set_qty(self):
         self.ensure_one()

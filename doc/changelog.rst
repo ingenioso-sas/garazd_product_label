@@ -3,6 +3,12 @@
 Changelog
 =========
 
+`13.0.1.13.0`
+--------
+
+- [ADD] Procesamiento por lotes en la impresion de etiquetas: se configura el tamano del lote desde Ajustes (Product Labels / Label batch size). Al imprimir muchas etiquetas, el PDF se genera por lotes mas pequenos y se unen, limitando el consumo de RAM/CPU en contenedores con recursos limitados. Valor 0 = comportamiento anterior (un solo render).
+- [FIX] Se elimina el dict unpacking (`{**...}`) en los templates QWeb, que esta prohibido por el safe_eval de Odoo 13. El costo en codigo se calcula una vez por producto sin usar diccionarios.
+
 `13.0.1.12.0`
 --------
 

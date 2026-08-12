@@ -6,7 +6,7 @@
 
 {
     'name': 'Custom Product Labels',
-    'version': '13.0.1.12.0',
+    'version': '13.0.1.13.0',
     'category': 'Product Management',
     'author': 'Garazd Creation, Anderson Buitron',
     'website': "https://garazd.biz",
@@ -20,6 +20,7 @@
     'depends': ['product', 'customized_barcode_generator'],
     'data': [
         'wizard/print_product_label_views.xml',
+        'wizard/print_product_label_settings_views.xml',
         'report/product_label_templates.xml',
         'report/product_label_templates_a4.xml',
         'report/product_label_templates_25x25.xml',

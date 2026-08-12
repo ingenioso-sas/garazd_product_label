@@ -55,14 +55,12 @@
             <t t-set="total" t-value="columns * rows" />
             
             <div style="margin: 0 !important; padding: 0 !important;">
-                <t t-set="cost_codes" t-value="{}"/>
                 <t t-foreach="label_docs" t-as="label">
                     <t t-set="qty" t-value="1" />
                     <t t-if="label.qty">
                         <t t-set="qty" t-value="label.qty" />
                     </t>
-                    <t t-set="cost_code" t-value="cost_codes.get(label.product_id.id) or label.product_id.get_cost_in_code()[:-3]"/>
-                    <t t-set="cost_codes" t-value="{**cost_codes, label.product_id.id: cost_code}"/>
+                    <t t-set="cost_code" t-value="label.product_id.get_cost_in_code()[:-3]"/>
                     <t t-foreach="list(range(qty))" t-as="index_qty">
                         <div t-if="count % total == 0 and count" style="page-break-after:always;"/>
                         <div t-if="count % columns == 0 and count" style="clear:both;"/>
