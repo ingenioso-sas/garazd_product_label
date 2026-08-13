@@ -10,7 +10,8 @@ class PrintProductLabelLine(models.TransientModel):
     selected = fields.Boolean(
         string='Print',
         compute='_compute_selected',
-        readonly=True,
+        store=True,
+        readonly=False,
     )
     wizard_id = fields.Many2one('print.product.label', 'Print Wizard')
     product_id = fields.Many2one('product.product', 'Product', required=True)

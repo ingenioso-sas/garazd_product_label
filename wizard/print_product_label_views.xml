@@ -21,6 +21,9 @@
                         class="btn-secondary mr8"  />
 
                 </header>
+                <div class="alert alert-warning text-center" role="alert" style="margin-bottom: 8px;">
+                    <strong>Advertencia:</strong> Imprimir por encima de 250 etiquetas a la vez puede degradar el sistema. Si hay errores, intente con una menor cantidad de etiquetas.
+                </div>
                 <group name="settings">
                     <field name="template" string="Label template" widget="radio"/>
                 </group>
